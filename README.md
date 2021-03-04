@@ -16,7 +16,7 @@ cd  your_katalog_name
 
 Copy files that are in the cloned repository into your_katalog_name.
 
-To activate virtual environment.
+To activate virtual environment:
 ```
 . bin/activate
 ```   
@@ -30,7 +30,7 @@ pip install robotframework-sshlibrary
 pip install robotframework-seleniumlibrary
 sudo apt install firefox-geckodriver
 ```
-With this commend you can check if you have installed everything:
+With this command you can check if you have installed everything:
 ```
 pip freeze
 ```
