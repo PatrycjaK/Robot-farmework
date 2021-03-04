@@ -1,5 +1,5 @@
 *** SETTINGS ***
-Library   funkcjarobot.py
+Library   function.py
 Library   SSHLibrary
 Library   SeleniumLibrary
 
@@ -14,8 +14,8 @@ third test case in robot
   First Keyword   Goodbye
 
 Addition testing
-  ${RESULT}=   sumowanie stringow   ala   kota
-  Should Be Equal   ${RESULT}   alakotaalakota
+  ${RESULT}=   string summing   Hey   Hi   Hello
+  Should Be Equal   ${RESULT}   Hey Hi Hello
 
 Uname test
   Connect to local Host
@@ -23,18 +23,18 @@ Uname test
   Input Command
   Log Out
 
-Test poloczenia internetowego
+Internet Connection Test
     Connect to local Host
     Input username and password
-    Weryfikacja poloczenia internetowego
+    Internet connection verification
     Log Out
 
-Test logowania do poczty wp
-  Otworzenie przegldarki Firefox
-  Otworzenie strony 1login.wp.pl
-  Wpisanie loginu i hasla
-  Sprawdzenie czy pojawia sie slowo Odebrane
-  Zamkniecie przegladarki
+WP email login test
+  Open Firefox browser
+  Open proper website
+  Enter login and password
+  Check if there is a word: Odebrane
+  Close browser
 
 
 *** Variables ***
@@ -45,7 +45,7 @@ ${PASSWORD}   tester
 ${BROWSER}   Firefox
 ${VALID USER}   testerwsb_t1
 ${VALID PASSWORD}   adam1234
-${URLWPPOCZTA}   https://profil.wp.pl/login.html?zaloguj=poczta
+${URLWPMAIL}   https://profil.wp.pl/login.html?zaloguj=poczta
 ${LOGIN}   //*[@id="login"]
 ${PASSWORDWP}   //*[@id="password"]
 ${BUTTON}   css:.nSubmit
@@ -68,25 +68,25 @@ Input Command
 Log out
   Close All Connections
 
-Weryfikacja poloczenia internetowego
-  ${wynik}=   Execute Command   ping -q -c1 8.8.8.8
-  Should Contain   ${wynik}   1 received
-  Should Not Contain   ${wynik}   100% packet loss
+Internet connection verification
+  ${result}=   Execute Command   ping -q -c1 8.8.8.8
+  Should Contain   ${result}   1 received
+  Should Not Contain   ${result}   100% packet loss
 
-Otworzenie przegldarki Firefox
+Open Firefox browser
   Open browser   about:blank   ${BROWSER}
 
-Otworzenie strony 1login.wp.pl
-  Go To   ${URLWPPOCZTA}
+Open proper website
+  Go To   ${URLWPMAIL}
 
-Wpisanie loginu i hasla
+Enter login and password
   Input text   ${LOGIN}   ${VALID USER}
   Input text   ${PASSWORDWP}   ${VALID PASSWORD}
   Click Element   ${BUTTON}
   Sleep   15
 
-Sprawdzenie czy pojawia sie slowo Odebrane
+Check if there is a word: Odebrane
   Page Should Contain   Odebrane
 
-Zamkniecie przegladarki
+Close browser
   Close All Browsers
